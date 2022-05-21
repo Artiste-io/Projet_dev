@@ -18,9 +18,6 @@ class Images
     #[ORM\Column(type: 'string', length: 255)]
     private $url;
 
-    #[ORM\OneToMany(mappedBy: 'images', targetEntity: Artist::class)]
-    private $artist;
-
     public function __construct()
     {
         $this->artist = new ArrayCollection();
@@ -39,36 +36,6 @@ class Images
     public function setUrl(string $url): self
     {
         $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Artist>
-     */
-    public function getArtist(): Collection
-    {
-        return $this->artist;
-    }
-
-    public function addArtist(Artist $artist): self
-    {
-        if (!$this->artist->contains($artist)) {
-            $this->artist[] = $artist;
-            $artist->setImages($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArtist(Artist $artist): self
-    {
-        if ($this->artist->removeElement($artist)) {
-            // set the owning side to null (unless already changed)
-            if ($artist->getImages() === $this) {
-                $artist->setImages(null);
-            }
-        }
 
         return $this;
     }

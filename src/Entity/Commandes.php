@@ -18,14 +18,6 @@ class Commandes
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
 
-    #[ORM\OneToOne(targetEntity: Artist::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $artist;
-
-    #[ORM\OneToOne(targetEntity: Client::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $client;
-
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
     private $titre;
 
@@ -50,30 +42,6 @@ class Commandes
     public function setImage(string $image): self
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getArtist(): ?Artist
-    {
-        return $this->artist;
-    }
-
-    public function setArtist(Artist $artist): self
-    {
-        $this->artist = $artist;
-
-        return $this;
-    }
-
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(Client $client): self
-    {
-        $this->client = $client;
 
         return $this;
     }
