@@ -19,8 +19,9 @@
 {#</div>#}
 
     {% for profil in artist %}
+{#        <div>{{ dump(profil) }}</div>#}
         <br>
-        <div class="d-flex position-relative border" style="background-color: white">
+        <div class="d-flex position-relative border rounded-pill" style="background-color: white">
             <img src="{{ profil.0.photo }}" alt="..." style="width: 200px; height: auto">
             <div class="row" style="width: 100%">
                 <h4 class="mt-0 col-3" style="text-align: center">{{ profil.0.username }}</h4>

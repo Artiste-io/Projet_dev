@@ -15,8 +15,12 @@ class Images
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'text')]
     private $url;
+
+    #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'galerie')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $artist;
 
     public function __construct()
     {
@@ -36,6 +40,18 @@ class Images
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getArtist(): ?Artist
+    {
+        return $this->artist;
+    }
+
+    public function setArtist(?Artist $artist): self
+    {
+        $this->artist = $artist;
 
         return $this;
     }

@@ -15,8 +15,6 @@ class ArtistController extends AbstractController
     #[Route('/artist', name: 'app_artist')]
     public function index(ManagerRegistry $doctrine): Response
     {
-
-
         $artist = $doctrine->getRepository(User::class)->findBy(['profil' => 'Artist']);
 //        $artist = $doctrine->getRepository(User::class)->findBy(['artist' => notnull]);
 
@@ -24,14 +22,14 @@ class ArtistController extends AbstractController
                 $tab[$i][0] = $artist[$i];
                 $tab[$i][1] = $artist[$i]->getTags();
         }
-                $tags = $artist[0]->getTags();
+//                $tags = $artist[0]->getTags();
 
 //        $artist = $artist[1]->getId();
 
         return $this->render('artist/index.html.twig', [
             'controller_name' => 'ArtistController',
             'artist' => $tab,
-            'tags' => $tags,
+//            'tags' => $tags,
         ]);
     }
 }

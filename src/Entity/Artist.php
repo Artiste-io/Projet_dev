@@ -24,9 +24,13 @@ class Artist
     #[ORM\ManyToMany(targetEntity: Tags::class)]
     private $tags;
 
+    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: Images::class, orphanRemoval: true)]
+    private $galerie;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->galerie = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,6 +82,36 @@ class Artist
     public function removeTag(Tags $tag): self
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getGalerie(): Collection
+    {
+        return $this->galerie;
+    }
+
+    public function addGalerie(Images $galerie): self
+    {
+        if (!$this->galerie->contains($galerie)) {
+            $this->galerie[] = $galerie;
+            $galerie->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGalerie(Images $galerie): self
+    {
+        if ($this->galerie->removeElement($galerie)) {
+            // set the owning side to null (unless already changed)
+            if ($galerie->getArtist() === $this) {
+                $galerie->setArtist(null);
+            }
+        }
 
         return $this;
     }

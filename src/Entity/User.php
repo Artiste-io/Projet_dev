@@ -87,15 +87,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
-
     public function getPhoto(): ?string
     {
         return $this->photo;
@@ -132,11 +123,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRoles(): array
-    {
-        return array('ROLE_USER');
-    }
-
     public function getProfil(): ?string
     {
         return $this->profil;
@@ -171,5 +157,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->tags->removeElement($tag);
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+//--------------------------------------------------//
+
+    public function getRoles(): array
+    {
+        return array('ROLE_USER');
     }
 }
