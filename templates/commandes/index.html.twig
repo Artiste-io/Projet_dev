@@ -23,7 +23,11 @@
                 <p>{{ aCommande.1.username }}</p>
                 <img src="{{ aCommande.1.photo }}" style="width: 20%"/>
             </div>
-
+            {% for tCommande in aCommande %}
+                {% for iCommande in tCommande %}
+                    <p>{{ iCommande.title }}</p>
+                {% endfor %}
+            {% endfor %}
         </div>
     {% endfor %}
 </div>

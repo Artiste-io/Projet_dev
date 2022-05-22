@@ -24,6 +24,7 @@ class CommandesController extends AbstractController
         {
             $artiste[$i][0] = $commande[$i];
             $artiste[$i][1] = $commande[$i]->getArtist();
+            $artiste[$i][2] = $commande[$i]->getTags();
         }
 
         return $this->render('commandes/index.html.twig', [
