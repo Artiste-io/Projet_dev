@@ -1,33 +1,59 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello CommandesController!{% endblock %}
-
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .commande{
+        flex-wrap: wrap;
+    }
+    img {
+        width: 30vw;
+        height: 30vh;
+    }
+    .artiste{
+        align-self: flex-end;
+        width: 30vw;
+        height: 30vh;
+    }
+    .commandeInfo{
+        width: 30vw;
+    }
+    .artiste img{
+        width: 150px;
+        height: 150px;
+        background-color: white;
+    }
+
+    .tags{
+        width: 100vw;
+        height: 15vh;
+    }
 </style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Voici vos commandes</h1>
     {% for aCommande in getArtiste %}
-        <div>
-            {% if aCommande.0.titre == '' %}
-                <h1>sans titre</h1>
-            {% else %}
-                <h1>{{ aCommande.0.titre }}</h1>
-            {% endif %}
-            <img src="{{ aCommande.0.image }}"style="width: 50%"/>
-
-            <div>
-                <p>{{ aCommande.1.username }}</p>
-                <img src="{{ aCommande.1.photo }}" style="width: 20%"/>
+        <div class="d-flex position-relative commande border border-dark">
+            <img src="{{ aCommande.0.image }}" class="flex-shrink-0 me-3">
+            <div class="commandeInfo">
+                    {% if aCommande.0.titre == '' %}#}
+                        <h1>Pas de titre</h1>
+                    {% else %}
+                        <h1>{{ aCommande.0.titre }}</h1>
+                    {% endif %}
             </div>
-            {% for tCommande in aCommande %}
-                {% for iCommande in tCommande %}
-                    <p>{{ iCommande.title }}</p>
+
+            <div class="artiste">
+                <p>{{ aCommande.1.username }}</p>
+                <img class="rounded-circle" src="{{ aCommande.1.photo }}"/>
+            </div>
+
+            <div class="tags">
+                {% for tCommande in aCommande %}
+                    {% for iCommande in tCommande %}
+                        <span class="badge bg-dark">{{ iCommande.title }}</span>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
+            </div>
+            <a href="#" class="stretched-link"></a>
         </div>
     {% endfor %}
 </div>
