@@ -19,10 +19,14 @@ class ArtistController extends AbstractController
 //        $artist = $doctrine->getRepository(User::class)->findBy(['artist' => notnull]);
 
         for($i = 0; $i < sizeof($artist); $i++){
-                $tab[$i][0] = $artist[$i];
-                $tab[$i][1] = $artist[$i]->getTags();
+            $tab[$i][0] = $artist[$i];
+//            $tab[$i][1] = $artist[$i]->getTags();
+
+            $tags2 = $artist[$i]->getArtist();
+            $tab[$i][1] = $tags2->getTags();
         }
-//                $tags = $artist[0]->getTags();
+//        $tags1 = $artist[0]->getArtist();
+//        $tags = $tags1->getTags();
 
 //        $artist = $artist[1]->getId();
 

@@ -27,6 +27,7 @@
                 <h4 class="mt-0 col-3" style="text-align: center">{{ profil.0.username }}</h4>
                 <div class="col-8">
                     {% for infos in profil %}
+{#                            <div>{{ dump(infos) }}</div>#}
                         {% for tag in infos %}
                             <span class="badge bg-secondary">{{ tag.title }}</span>
                         {% endfor %}
@@ -43,6 +44,7 @@
             {#                <div>{{ tag.title }}</div>#}
 
 
+{#        <div>{{ dump(tags) }}</div>#}
 {#    {% for tag in tags %}#}
 {#        <div>{{ dump(tag) }}</div>#}
 {#        <div>{{ tag.title }}</div>#}
