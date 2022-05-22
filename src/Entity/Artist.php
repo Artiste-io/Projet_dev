@@ -47,9 +47,13 @@ class Artist implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(targetEntity: Images::class, inversedBy: 'artist')]
     private $images;
 
+    #[ORM\OneToMany(mappedBy: 'artist', targetEntity: Commandes::class)]
+    private $commandes;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,6 +218,36 @@ class Artist implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImages(?Images $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commandes>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commandes $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setArtist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commandes $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getArtist() === $this) {
+                $commande->setArtist(null);
+            }
+        }
 
         return $this;
     }
