@@ -10,11 +10,21 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for aCommande in getArtiste %}
+        <div>
+            {% if aCommande.0.titre == '' %}
+                <h1>sans titre</h1>
+            {% else %}
+                <h1>{{ aCommande.0.titre }}</h1>
+            {% endif %}
+            <img src="{{ aCommande.0.image }}"style="width: 50%"/>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/OneDrive - Ynov/Ynov/B2/PROJETS/Projet_dev/PROJET_DEV/src/Controller/CommandesController.php'|file_link(0) }}">src/Controller/CommandesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/OneDrive - Ynov/Ynov/B2/PROJETS/Projet_dev/PROJET_DEV/templates/commandes/index.html.twig'|file_link(0) }}">templates/commandes/index.html.twig</a></code></li>
-    </ul>
+            <div>
+                <p>{{ aCommande.1.username }}</p>
+                <img src="{{ aCommande.1.photo }}" style="width: 20%"/>
+            </div>
+
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

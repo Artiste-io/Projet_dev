@@ -18,19 +18,20 @@ class Commandes
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
 
-    #[ORM\OneToOne(targetEntity: Artist::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $artist;
-
-    #[ORM\OneToOne(targetEntity: Client::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private $client;
 
     #[ORM\Column(type: 'string', length: 180, nullable: true)]
     private $titre;
 
     #[ORM\ManyToMany(targetEntity: Tags::class)]
     private $tags;
+
+    #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $client;
+
+    #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $artist;
 
     public function __construct()
     {
@@ -50,30 +51,6 @@ class Commandes
     public function setImage(string $image): self
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getArtist(): ?Artist
-    {
-        return $this->artist;
-    }
-
-    public function setArtist(Artist $artist): self
-    {
-        $this->artist = $artist;
-
-        return $this;
-    }
-
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(Client $client): self
-    {
-        $this->client = $client;
 
         return $this;
     }
@@ -110,6 +87,30 @@ class Commandes
     public function removeTag(Tags $tag): self
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getArtist(): ?Artist
+    {
+        return $this->artist;
+    }
+
+    public function setArtist(?Artist $artist): self
+    {
+        $this->artist = $artist;
 
         return $this;
     }
