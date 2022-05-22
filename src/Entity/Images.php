@@ -15,10 +15,11 @@ class Images
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'text')]
     private $url;
 
-    #[ORM\OneToMany(mappedBy: 'images', targetEntity: Artist::class)]
+    #[ORM\ManyToOne(targetEntity: Artist::class, inversedBy: 'galerie')]
+    #[ORM\JoinColumn(nullable: false)]
     private $artist;
 
     public function __construct()
@@ -43,32 +44,14 @@ class Images
         return $this;
     }
 
-    /**
-     * @return Collection<int, Artist>
-     */
-    public function getArtist(): Collection
+    public function getArtist(): ?Artist
     {
         return $this->artist;
     }
 
-    public function addArtist(Artist $artist): self
+    public function setArtist(?Artist $artist): self
     {
-        if (!$this->artist->contains($artist)) {
-            $this->artist[] = $artist;
-            $artist->setImages($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArtist(Artist $artist): self
-    {
-        if ($this->artist->removeElement($artist)) {
-            // set the owning side to null (unless already changed)
-            if ($artist->getImages() === $this) {
-                $artist->setImages(null);
-            }
-        }
+        $this->artist = $artist;
 
         return $this;
     }
