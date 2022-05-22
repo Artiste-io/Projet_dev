@@ -44,11 +44,11 @@
             {#                <div>{{ tag.title }}</div>#}
 
 
-{#        <div>{{ dump(tags) }}</div>#}
-{#    {% for tag in tags %}#}
-{#        <div>{{ dump(tag) }}</div>#}
+        <div>{{ dump(tags) }}</div>
+    {% for tag in tags %}
+        <div>{{ dump(tag) }}</div>
+        <img src="{{ tag.url }}" alt="..." style="width: 200px; height: auto">
 {#        <div>{{ tag.title }}</div>#}
-{#    {% endfor %}#}
-{#        <div>{{ dump(tags) }}</div>#}
+    {% endfor %}
 
 {% endblock %}

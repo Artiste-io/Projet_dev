@@ -28,12 +28,15 @@ class ArtistController extends AbstractController
 //        $tags1 = $artist[0]->getArtist();
 //        $tags = $tags1->getTags();
 
+        $gal = $artist[0]->getArtist();
+        $galerie = $gal->getGalerie();
+
 //        $artist = $artist[1]->getId();
 
         return $this->render('artist/index.html.twig', [
             'controller_name' => 'ArtistController',
             'artist' => $tab,
-//            'tags' => $tags,
+            'tags' => $galerie,
         ]);
     }
 }
