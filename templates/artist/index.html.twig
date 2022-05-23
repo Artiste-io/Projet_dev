@@ -32,6 +32,15 @@
                             <span class="badge bg-secondary">{{ tag.title }}</span>
                         {% endfor %}
                     {% endfor %}
+                    <br>
+                </div>
+                <div>
+
+                        {% for tag in tags %}
+{#                            <div>{{ dump(tag) }}</div>#}
+                            <img src="{{ tag.url }}" alt="..." class="rounded float-start" style="max-height: 100px; width: auto">
+{#                            <div>{{ tag.title }}</div>#}
+                        {% endfor %}
                 </div>
                 <a href="/presentation" class="stretched-link"></a>
             </div>
@@ -44,11 +53,11 @@
             {#                <div>{{ tag.title }}</div>#}
 
 
-        <div>{{ dump(tags) }}</div>
-    {% for tag in tags %}
-        <div>{{ dump(tag) }}</div>
-        <img src="{{ tag.url }}" alt="..." style="width: 200px; height: auto">
+{#        <div>{{ dump(tags) }}</div>#}
+{#    {% for tag in tags %}#}
+{#        <div>{{ dump(tag) }}</div>#}
+{#        <img src="{{ tag.url }}" alt="..." style="width: 200px; height: auto">#}
 {#        <div>{{ tag.title }}</div>#}
-    {% endfor %}
+{#    {% endfor %}#}
 
 {% endblock %}
